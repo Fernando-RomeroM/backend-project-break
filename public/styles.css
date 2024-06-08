@@ -1,0 +1,33 @@
+/* public/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#feelcab {
+    background-color: black;
+    color: azure;
+    width: auto;
+    height: 100px;
+    margin: auto;
+}
