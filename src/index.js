@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
             <link rel="stylesheet" href="/styles.css">
         </head>
         <body>
-            <h1 id="feelcab">Feel the Fire, tienda de ropa</h1>
+            <div id="feelcab"><img src="/images/firelogo.png" alt="Feel the Fire Logo"><h1>Feel the Fire, tienda de ropa</h1></div>
             <a href="/todos">Ir a todos</a>
             <br>
             <a href="/camisetas">Camisetas</a>

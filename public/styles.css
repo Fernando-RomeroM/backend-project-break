@@ -2,12 +2,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
-    margin: 0;
-    padding: 20px;
+    margin: 10px;
+    padding-top: 100px;
 }
 
 h1 {
-    color: #333;
+    color: firebrick; /* Color de titulo inicio */
 }
 
 a {
@@ -26,8 +26,14 @@ img {
 
 #feelcab {
     background-color: black;
-    color: azure;
-    width: auto;
-    height: 100px;
+    width: 100%;
+    height: 90px;
     margin: auto;
+    padding-left: 50px;
+    flex: auto;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1; /* para no superponer otros objetos*/
 }
