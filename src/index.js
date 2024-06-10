@@ -18,16 +18,12 @@ app.get('/', (req, res) => {
             <link rel="stylesheet" href="/styles.css">
         </head>
         <body>
-            <div id="feelcab"><img src="/images/firelogo.png" alt="Feel the Fire Logo"><h1>Feel the Fire, tienda de ropa</h1></div>
-            <a href="/todos">Ir a todos</a>
-            <br>
-            <a href="/camisetas">Camisetas</a>
-            <br>
-            <a href="/pantalones">Pantalones</a>
-            <br>
-            <a href="/zapatos">Zapatos</a>
-            <br>
-            <a href="/accesorios">Accesorios</a>
+            <div id="feelcab"><img src="/images/firelogo.png" alt="Feel the Fire Logo"><h1>Feel the Fire</h1> <input type="text" id="busca" placeholder="Buscador" required></div>
+            <p><a href="/todos">Ir a todos</a></p>
+            <p><a href="/camisetas">Camisetas</a></p>
+            <p><a href="/pantalones">Pantalones</a></p>
+            <p><a href="/zapatos">Zapatos</a></p>
+            <p><a href="/accesorios">Accesorios</a></p>
         </body>
         </html>
     `);
@@ -40,9 +36,25 @@ app.get('/todos', (req, res) =>{
 
 // Camisetas
 app.get('/camisetas', (req, res) => {
-    res.send('<h1>Disfrutas de las camisetas de tus bandas favoritas. LEST ROCK!</h1>')
+    res.send('<h1>Disfrutas de las camisetas de tus bandas favoritas. LEST ROCK!</h1><br><a href="/">Volver al Inicio</a>')
 })
 
+// Pantalones
+app.get('/pantalones', (req, res) => {
+    res.send('<h1>El hombre honorable es el que se viste por los pantalones</h1><br><a href="/">Volver al Inicio</a>')
+})
+
+// Zapatos
+app.get('/zapatos', (req, res) =>{
+    res.send('<h1>Intenta ponerte en mis zapatos</h1><br><a href="/">Volver al Inicio</a>')
+})
+
+// Accesorios
+app.get('/accesorios', (req, res) =>{
+    res.send('<h1>Los accesorios son esenciales</h1><br><a href="/">Volver al Inicio</a>')
+})
+
+//Error 404
 app.use((req, res) => {
     res.status(404).send('<img src="/images/error404.jpg" alt="Error 404"><br><a href="/">Volver al Inicio</a>');
 });
