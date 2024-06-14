@@ -1,19 +1,39 @@
 const express = require('express');
 const path = require('path');
-const app = express();
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const Product = require('./models/Product'); 
 
-const port = process.env.PORT || 3000; // Usar la variable de entorno PORT si está definida ¿?
+const app = express();
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
 
+// Conectar a la base de datos MongoDB usando Mongoose
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log('MongoDB Connected');
+    } catch (error) {
+        console.error(`Error: ${error.message}`);
+        process.exit(1); // Exit process with failure
+    }
+};
+
+connectDB();
+
 // Configurar la carpeta 'public' como la carpeta estática
 app.use(express.static(path.join(__dirname, '../public')));
 
-
 // Página de Inicio
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    let productos;
+    const productodos = await Product.find() //cambiar parámetro dependiendo artículo objeto {type:valor}
+    
+    
+    console.log(productodos[0])
+    
+
     res.send(`
         <!DOCTYPE html>
         <html lang="es">
@@ -42,45 +62,56 @@ app.get('/', (req, res) => {
                 <p><a href="/zapatos">Zapatos</a></p>
                 <p><a href="/accesorios">Accesorios</a></p>
             </div>
+            <div>
+                ${productodos.map(producto => { 
+                    console.log(producto)
+                    return ` 
+                
+                <div id="caja1"> 
+                <div id="borde1"><img id="img1" src="${producto.imagen}">
+                </div>
+                <p id="nombre1">${producto.name}</p>
+                <button id="precio1">${producto.price} €</button>
+                </div>`}).join('')} 
+            </div>
+
         </body>
         </html>
     `);
 });
 
 // Página todos
-app.get('/todos', (req, res) =>{
+app.get('/todos', (req, res) => {
     res.send('<h3>Toda tu ropa a el mejor precio</h3><a href="/">Inicio</a>');
 });
 
 // Camisetas
 app.get('/camisetas', (req, res) => {
-    res.send('<h1>Disfrutas de las camisetas de tus bandas favoritas. LEST ROCK!</h1><br><a href="/">Volver al Inicio</a>')
+    res.send('<h1>Disfrutas de las camisetas de tus bandas favoritas. LEST ROCK!</h1><br><a href="/">Volver al Inicio</a>');
 })
 
 // Pantalones
 app.get('/pantalones', (req, res) => {
-    res.send('<h1>El hombre honorable es el que se viste por los pantalones</h1><br><a href="/">Volver al Inicio</a>')
+    res.send('<h1>El hombre honorable es el que se viste por los pantalones</h1><br><a href="/">Volver al Inicio</a>');
 })
 
 // Zapatos
-app.get('/zapatos', (req, res) =>{
-    res.send('<h1>Intenta ponerte en mis zapatos</h1><br><a href="/">Volver al Inicio</a>')
+app.get('/zapatos', (req, res) => {
+    res.send('<h1>Intenta ponerte en mis zapatos</h1><br><a href="/">Volver al Inicio</a>');
 })
 
 // Accesorios
-app.get('/accesorios', (req, res) =>{
-    res.send('<h1>Los accesorios son esenciales</h1><br><a href="/">Volver al Inicio</a>')
+app.get('/accesorios', (req, res) => {
+    res.send('<h1>Los accesorios son esenciales</h1><br><a href="/">Volver al Inicio</a>');
 })
 
-//Error 404
+// Error 404
 app.use((req, res) => {
     res.status(404).send('<img src="/images/error404.jpg" alt="Error 404"><br><a href="/">Volver al Inicio</a>');
 });
 
-app.listen(3000, () => {
-    console.log('Feel the Fire its in the house');
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Feel the Fire its in the House ${PORT}`);
 });
-
-
-//rutas 
-
