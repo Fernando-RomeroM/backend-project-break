@@ -16,7 +16,7 @@ const connectDB = async () => {
         console.log('MongoDB Connected');
     } catch (error) {
         console.error(`Error: ${error.message}`);
-        process.exit(1); // Exit process with failure
+        process.exit(1); // Error por si falla
     }
 };
 
@@ -31,7 +31,7 @@ app.get('/', async (req, res) => {
     const productodos = await Product.find() //cambiar parámetro dependiendo artículo objeto {type:valor}
     
     
-    console.log(productodos[0])
+    // console.log(productodos[0])
     
 
     res.send(`
@@ -61,12 +61,12 @@ app.get('/', async (req, res) => {
                 <p><a href="/pantalones">Pantalones</a></p>
                 <p><a href="/zapatos">Zapatos</a></p>
                 <p><a href="/accesorios">Accesorios</a></p>
+                <p><a href="/dashboard/new">CREAR PRODUCTO</a></p> <!-- Añadido el botón CREAR PRODUCTO -->
             </div>
-            <div>
+            <div id="todsjunts">
                 ${productodos.map(producto => { 
-                    console.log(producto)
-                    return ` 
-                
+                    // console.log(producto)
+                    return `        
                 <div id="caja1"> 
                 <div id="borde1"><img id="img1" src="${producto.imagen}">
                 </div>
@@ -104,6 +104,32 @@ app.get('/zapatos', (req, res) => {
 app.get('/accesorios', (req, res) => {
     res.send('<h1>Los accesorios son esenciales</h1><br><a href="/">Volver al Inicio</a>');
 })
+
+// Ruta para crear un nuevo producto
+app.get('/dashboard/new', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html lang="es">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Crear Producto</title>
+        </head>
+        <body>
+            <h1>Crear un Nuevo Producto</h1>
+            <form action="/products" method="post">
+                <label for="name">Nombre del Producto:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="price">Precio:</label><br>
+                <input type="number" id="price" name="price" required><br><br>
+                <label for="description">Descripción:</label><br>
+                <textarea id="description" name="description" required></textarea><br><br>
+                <button type="submit">Crear Producto</button>
+            </form>
+        </body>
+        </html>
+    `);
+});
 
 // Error 404
 app.use((req, res) => {

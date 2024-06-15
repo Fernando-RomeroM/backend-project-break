@@ -118,10 +118,17 @@ img {
     margin: 0;
     display: grid;
     place-items: center;
+    margin: 10px 0px 10px 0px;
 }
 
 #img1 {
     height: 250px;
     width: 100%;
     display: flex;
+}
+
+#todsjunts {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
